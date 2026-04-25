@@ -17,6 +17,8 @@ function ZodiacCompatibility() {
   // API 응답의 name 값을 프론트 표시용 한글 라벨/심볼 데이터와 연결합니다.
   const first = getZodiacSign(result.sign1.name)
   const second = getZodiacSign(result.sign2.name)
+  const selectedFirst = getZodiacSign(firstSign)
+  const selectedSecond = getZodiacSign(secondSign)
 
   return (
     <section className="section-panel zodiac-panel" aria-labelledby="zodiac-title">
@@ -35,10 +37,13 @@ function ZodiacCompatibility() {
             <select value={firstSign} onChange={(event) => setFirstSign(event.target.value)}>
               {zodiacSigns.map((sign) => (
                 <option key={sign.name} value={sign.name}>
-                  {sign.symbol} {sign.label}
+                  {sign.symbol} {sign.label} ({sign.dateRange})
                 </option>
               ))}
             </select>
+            <small className="date-range">
+              {selectedFirst.label}: {selectedFirst.dateRange}
+            </small>
           </label>
 
           <label>
@@ -46,10 +51,13 @@ function ZodiacCompatibility() {
             <select value={secondSign} onChange={(event) => setSecondSign(event.target.value)}>
               {zodiacSigns.map((sign) => (
                 <option key={sign.name} value={sign.name}>
-                  {sign.symbol} {sign.label}
+                  {sign.symbol} {sign.label} ({sign.dateRange})
                 </option>
               ))}
             </select>
+            <small className="date-range">
+              {selectedSecond.label}: {selectedSecond.dateRange}
+            </small>
           </label>
         </form>
 
@@ -58,13 +66,17 @@ function ZodiacCompatibility() {
             <div>
               <strong>{first.symbol}</strong>
               <span>{first.label}</span>
-              <small>{result.sign1.element_label}</small>
+              <small>
+                {first.dateRange} · {result.sign1.element_label}
+              </small>
             </div>
             <b>+</b>
             <div>
               <strong>{second.symbol}</strong>
               <span>{second.label}</span>
-              <small>{result.sign2.element_label}</small>
+              <small>
+                {second.dateRange} · {result.sign2.element_label}
+              </small>
             </div>
           </div>
 

@@ -184,6 +184,12 @@
   outline-offset: 2px;
 }
 
+.date-range {
+  color: var(--accent-strong);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .result-card {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) 140px;
@@ -228,6 +234,7 @@
 
 .sign-row small {
   color: var(--muted);
+  text-align: center;
 }
 
 .sign-row b {

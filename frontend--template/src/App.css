@@ -50,6 +50,13 @@
   margin: 6px 0 0;
 }
 
+.section-heading p {
+  max-width: 300px;
+  color: var(--muted);
+  font-size: 15px;
+  text-align: right;
+}
+
 .member-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -141,6 +148,140 @@
   background: #d94b66;
 }
 
+.zodiac-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(320px, 1.2fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.zodiac-form {
+  display: grid;
+  gap: 14px;
+}
+
+.zodiac-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.zodiac-form select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-strong);
+  background: #202536;
+  cursor: pointer;
+}
+
+.zodiac-form select:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.result-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 140px;
+  gap: 18px;
+  min-height: 238px;
+  padding: 22px;
+  border: 1px solid rgba(247, 198, 107, 0.28);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(247, 198, 107, 0.12), transparent),
+    rgba(255, 255, 255, 0.08);
+}
+
+.sign-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.sign-row div {
+  display: grid;
+  min-height: 128px;
+  place-items: center;
+  padding: 16px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(16, 19, 29, 0.42);
+}
+
+.sign-row strong {
+  color: var(--accent);
+  font-size: 36px;
+  line-height: 1;
+}
+
+.sign-row span {
+  color: var(--text-strong);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.sign-row small {
+  color: var(--muted);
+}
+
+.sign-row b {
+  color: var(--accent);
+  font-size: 24px;
+}
+
+.score-ring {
+  display: grid;
+  place-content: center;
+  align-self: stretch;
+  min-height: 140px;
+  border-radius: 8px;
+  color: var(--text-strong);
+  background:
+    radial-gradient(circle at center, #272c42 0 48%, transparent 50%),
+    conic-gradient(var(--accent) calc(var(--score, 100) * 1%), rgba(255, 255, 255, 0.12) 0);
+}
+
+.score-ring span {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.score-ring small {
+  margin-top: 4px;
+  text-align: center;
+}
+
+.result-copy {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.result-copy p {
+  color: var(--text-strong);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.result-copy code {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 13px;
+}
+
 @media (max-width: 820px) {
   .app-shell {
     width: min(100% - 24px, 1120px);
@@ -159,11 +300,25 @@
     display: block;
   }
 
+  .section-heading p {
+    margin-top: 8px;
+    text-align: left;
+  }
+
   .member-grid {
     grid-template-columns: 1fr;
   }
 
   .member-card {
     min-height: 168px;
+  }
+
+  .zodiac-layout,
+  .result-card {
+    grid-template-columns: 1fr;
+  }
+
+  .result-copy {
+    display: grid;
   }
 }

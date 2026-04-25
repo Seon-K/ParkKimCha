@@ -1,4 +1,5 @@
 import MemberSection from './components/MemberSection'
+import ZodiacCompatibility from './components/ZodiacCompatibility'
 import './App.css'
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       </section>
 
       <MemberSection />
+      <ZodiacCompatibility />
     </main>
   )
 }

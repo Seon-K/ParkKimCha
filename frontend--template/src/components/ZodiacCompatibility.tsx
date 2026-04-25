@@ -1,10 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
-import {
-  getMockZodiacCompatibility,
-  getZodiacSign,
-  zodiacSigns,
-} from '../data/zodiac'
+import { getZodiacSign, zodiacSigns } from '../data/zodiac'
+import { getMockZodiacCompatibility } from '../data/zodiacMock'
 
 function ZodiacCompatibility() {
   const [firstSign, setFirstSign] = useState('leo')

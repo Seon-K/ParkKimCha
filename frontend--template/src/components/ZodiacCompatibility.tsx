@@ -59,7 +59,7 @@ function ZodiacCompatibility() {
               <strong>{first.symbol}</strong>
               <span>{first.label}</span>
               <small>
-                {first.dateRange} · {result.sign1.element_label}
+               {result.sign1.element_label}
               </small>
             </div>
             <b>+</b>
@@ -67,7 +67,7 @@ function ZodiacCompatibility() {
               <strong>{second.symbol}</strong>
               <span>{second.label}</span>
               <small>
-                {second.dateRange} · {result.sign2.element_label}
+               {result.sign2.element_label}
               </small>
             </div>
           </div>

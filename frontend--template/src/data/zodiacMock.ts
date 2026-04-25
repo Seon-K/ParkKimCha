@@ -1,6 +1,7 @@
 import type { ZodiacCompatibility } from './zodiac'
 import { zodiacSigns } from './zodiac'
 
+// 백엔드 API가 연결되기 전까지만 사용하는 임시 궁합 규칙입니다.
 const compatiblePairs = new Set([
   'air-fire',
   'earth-water',
@@ -10,6 +11,7 @@ const compatiblePairs = new Set([
 
 const neutralPairs = new Set(['air-air', 'earth-earth', 'fire-fire', 'water-water'])
 
+// 실제 API 연결 시 이 함수와 파일은 제거하고 fetch 응답을 사용하면 됩니다.
 export function getMockZodiacCompatibility(
   firstSignName: string,
   secondSignName: string,

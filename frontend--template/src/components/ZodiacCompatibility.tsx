@@ -4,13 +4,17 @@ import { getZodiacSign, zodiacSigns } from '../data/zodiac'
 import { getMockZodiacCompatibility } from '../data/zodiacMock'
 
 function ZodiacCompatibility() {
+  // select에서 선택한 값은 백엔드 API의 sign1, sign2 query 값으로 그대로 사용할 수 있습니다.
   const [firstSign, setFirstSign] = useState('leo')
   const [secondSign, setSecondSign] = useState('leo')
 
+  // 실제 API 연결 시 이 useMemo를 useEffect + fetch 로직으로 교체하면 됩니다.
   const result = useMemo(
     () => getMockZodiacCompatibility(firstSign, secondSign),
     [firstSign, secondSign],
   )
+
+  // API 응답의 name 값을 프론트 표시용 한글 라벨/심볼 데이터와 연결합니다.
   const first = getZodiacSign(result.sign1.name)
   const second = getZodiacSign(result.sign2.name)
 

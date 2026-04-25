@@ -5,6 +5,7 @@ export type Member = {
   message: string
 }
 
+// 백엔드 연동 없이 화면에 고정으로 노출하는 팀 멤버 데이터입니다.
 export const members: Member[] = [
   {
     id: 1,

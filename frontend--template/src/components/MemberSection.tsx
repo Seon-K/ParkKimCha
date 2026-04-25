@@ -9,6 +9,7 @@ function MemberSection() {
         <h2 id="members-title">멤버 소개</h2>
       </div>
       <div className="member-grid">
+        {/* members 배열을 map으로 순회해 멤버 카드를 렌더링합니다. */}
         {members.map((member) => (
           <MemberCard key={member.id} member={member} />
         ))}

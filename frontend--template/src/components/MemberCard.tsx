@@ -6,6 +6,7 @@ type MemberCardProps = {
 }
 
 function MemberCard({ member }: MemberCardProps) {
+  // 각 카드의 좋아요 상태는 카드별로 독립적으로 관리합니다.
   const [liked, setLiked] = useState(false)
 
   return (

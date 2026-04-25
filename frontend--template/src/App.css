@@ -426,6 +426,38 @@
   font-weight: 800;
 }
 
+.loading-state {
+  grid-column: 1 / -1;
+  display: grid;
+  min-height: 220px;
+  place-content: center;
+  place-items: center;
+  gap: 16px;
+  color: var(--text-strong);
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 54px;
+  height: 54px;
+  border: 4px solid rgba(255, 255, 255, 0.16);
+  border-top-color: var(--accent);
+  border-radius: 999px;
+  animation: spin 850ms linear infinite;
+  box-shadow: 0 0 28px rgba(255, 209, 102, 0.16);
+}
+
+.loading-state p {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 900px) {
   .app-shell {
     width: min(100% - 24px, 1120px);

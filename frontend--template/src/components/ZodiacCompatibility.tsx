@@ -2,13 +2,20 @@ import { useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { getZodiacSign, zodiacSigns } from '../data/zodiac'
 import { getMockZodiacCompatibility } from '../data/zodiacMock'
+import LoadingSpinner from './LoadingSpinner'
 
 function ZodiacCompatibility() {
   // select에서 선택한 값은 백엔드 API의 sign1, sign2 query 값으로 그대로 사용할 수 있습니다.
   const [firstSign, setFirstSign] = useState('leo')
   const [secondSign, setSecondSign] = useState('leo')
+  const [isLoading] = useState(false)
 
   // 실제 API 연결 시 이 useMemo를 useEffect + fetch 로직으로 교체하면 됩니다.
+  // 연동 위치:
+  // 0. 위 isLoading 상태는 const [isLoading, setIsLoading] = useState(false)로 변경합니다.
+  // 1. result를 useState로 변경합니다.
+  // 2. firstSign, secondSign이 바뀔 때 fetch('/api/zodiac/?sign1=...&sign2=...')를 호출합니다.
+  // 3. 요청 전 setIsLoading(true), 응답 저장 후 setIsLoading(false)를 호출하면 아래 LoadingSpinner가 표시됩니다.
   const result = useMemo(
     () => getMockZodiacCompatibility(firstSign, secondSign),
     [firstSign, secondSign],
@@ -53,36 +60,38 @@ function ZodiacCompatibility() {
           </label>
         </form>
 
-        <article className="result-card" aria-live="polite">
-          <div className="sign-row">
-            <div>
-              <strong>{first.symbol}</strong>
-              <span>{first.label}</span>
-              <small>
-               {result.sign1.element_label}
-              </small>
-            </div>
-            <b>+</b>
-            <div>
-              <strong>{second.symbol}</strong>
-              <span>{second.label}</span>
-              <small>
-               {result.sign2.element_label}
-              </small>
-            </div>
-          </div>
+        <article className="result-card" aria-live="polite" aria-busy={isLoading}>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <div className="sign-row">
+                <div>
+                  <strong>{first.symbol}</strong>
+                  <span>{first.label}</span>
+                  <small>{result.sign1.element_label}</small>
+                </div>
+                <b>+</b>
+                <div>
+                  <strong>{second.symbol}</strong>
+                  <span>{second.label}</span>
+                  <small>{result.sign2.element_label}</small>
+                </div>
+              </div>
 
-          <div className="score-ring" style={{ '--score': result.score } as CSSProperties}>
-            <span>{result.score}</span>
-            <small>점</small>
-          </div>
+              <div className="score-ring" style={{ '--score': result.score } as CSSProperties}>
+                <span>{result.score}</span>
+                <small>점</small>
+              </div>
 
-          <div className="result-copy">
-            <p>{result.message}</p>
-            <code>
-              out: {result.compatibility} / {result.score}
-            </code>
-          </div>
+              <div className="result-copy">
+                <p>{result.message}</p>
+                <code>
+                  out: {result.compatibility} / {result.score}
+                </code>
+              </div>
+            </>
+          )}
         </article>
       </div>
     </section>

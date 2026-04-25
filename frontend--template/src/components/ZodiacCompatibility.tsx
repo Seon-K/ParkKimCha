@@ -17,8 +17,6 @@ function ZodiacCompatibility() {
   // API 응답의 name 값을 프론트 표시용 한글 라벨/심볼 데이터와 연결합니다.
   const first = getZodiacSign(result.sign1.name)
   const second = getZodiacSign(result.sign2.name)
-  const selectedFirst = getZodiacSign(firstSign)
-  const selectedSecond = getZodiacSign(secondSign)
 
   return (
     <section className="section-panel zodiac-panel" aria-labelledby="zodiac-title">
@@ -27,7 +25,6 @@ function ZodiacCompatibility() {
           <span>Compatibility</span>
           <h2 id="zodiac-title">별자리 궁합</h2>
         </div>
-        <p>임시 mock 데이터로 결과를 출력합니다.</p>
       </div>
 
       <div className="zodiac-layout">
@@ -41,9 +38,7 @@ function ZodiacCompatibility() {
                 </option>
               ))}
             </select>
-            <small className="date-range">
-              {selectedFirst.label}: {selectedFirst.dateRange}
-            </small>
+
           </label>
 
           <label>
@@ -55,9 +50,6 @@ function ZodiacCompatibility() {
                 </option>
               ))}
             </select>
-            <small className="date-range">
-              {selectedSecond.label}: {selectedSecond.dateRange}
-            </small>
           </label>
         </form>
 

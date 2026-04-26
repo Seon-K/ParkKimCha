@@ -1,35 +1,47 @@
-/**
- * 별자리 궁합 선택 및 결과 표시 컴포넌트입니다.
- *
- * 두 별자리 값을 선택하고, 선택 결과에 맞는 궁합 점수와 메시지를 렌더링합니다.
- * 실제 API 연동 시 이 파일의 result 계산 부분을 fetch 로직으로 교체하면 됩니다.
- */
-import { useMemo, useState } from 'react'
+
+import { useState, useEffect } from 'react'
 import type { CSSProperties } from 'react'
-import { getZodiacSign, zodiacSigns } from '../data/zodiac'
-import { getMockZodiacCompatibility } from '../data/zodiacMock'
+import '../App.css'
 import LoadingSpinner from './LoadingSpinner'
+// 👇 아래 두 줄을 추가해서 사라진 데이터와 함수를 다시 불러오세요!
+//import { zodiacSigns } from '../data/zodiac' 
+// 만약 getZodiacSign이 zodiac.ts에 있다면 아래처럼 같이 써주면 됩니다.
+ import { zodiacSigns, getZodiacSign } from '../data/zodiac'
 
 function ZodiacCompatibility() {
-  // select에서 선택한 값은 백엔드 API의 sign1, sign2 query 값으로 그대로 사용할 수 있습니다.
   const [firstSign, setFirstSign] = useState('leo')
   const [secondSign, setSecondSign] = useState('leo')
-  const [isLoading] = useState(false)
+  const [result, setResult] = useState<any>(null); // 결과 저장용
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태
 
-  // 실제 API 연결 시 이 useMemo를 useEffect + fetch 로직으로 교체하면 됩니다.
-  // 연동 위치:
-  // 0. 위 isLoading 상태는 const [isLoading, setIsLoading] = useState(false)로 변경합니다.
-  // 1. result를 useState로 변경합니다.
-  // 2. firstSign, secondSign이 바뀔 때 fetch('/api/zodiac/?sign1=...&sign2=...')를 호출합니다.
-  // 3. 요청 전 setIsLoading(true), 응답 저장 후 setIsLoading(false)를 호출하면 아래 LoadingSpinner가 표시됩니다.
-  const result = useMemo(
-    () => getMockZodiacCompatibility(firstSign, secondSign),
-    [firstSign, secondSign],
-  )
+  useEffect(() => {
+    if (firstSign && secondSign) {
+      const fetchData = async () => {
+        setIsLoading(true);
+        try {
+          const response = await fetch(
+            `http://127.0.0.1:8000/api/zodiac/?sign1=${firstSign}&sign2=${secondSign}`
+          );
+          const data = await response.json();
+          setResult(data);
+        } catch (error) {
+          console.error("연결 에러:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchData();
+    }
+  }, [firstSign, secondSign]);
 
-  // API 응답의 name 값을 프론트 표시용 한글 라벨/심볼 데이터와 연결합니다.
-  const first = getZodiacSign(result.sign1.name)
-  const second = getZodiacSign(result.sign2.name)
+  // result가 아직 없을 때(로딩 전)를 위한 처리
+  if (!result && !isLoading) {
+    return <div>별자리를 선택해주세요!</div>;
+  }
+
+  // result가 있을 때만 아래 로직 실행
+  const first = result ? getZodiacSign(result.sign1.name) : null;
+  const second = result ? getZodiacSign(result.sign2.name) : null;
 
   return (
     <section className="section-panel zodiac-panel" aria-labelledby="zodiac-title">
@@ -51,7 +63,6 @@ function ZodiacCompatibility() {
                 </option>
               ))}
             </select>
-
           </label>
 
           <label>
@@ -67,20 +78,20 @@ function ZodiacCompatibility() {
         </form>
 
         <article className="result-card" aria-live="polite" aria-busy={isLoading}>
-          {isLoading ? (
+          {isLoading || !result ? (
             <LoadingSpinner />
           ) : (
             <>
               <div className="sign-row">
                 <div>
-                  <strong>{first.symbol}</strong>
-                  <span>{first.label}</span>
+                  <strong>{first?.symbol}</strong>
+                  <span>{first?.label}</span>
                   <small>{result.sign1.element_label}</small>
                 </div>
                 <b>+</b>
                 <div>
-                  <strong>{second.symbol}</strong>
-                  <span>{second.label}</span>
+                  <strong>{second?.symbol}</strong>
+                  <span>{second?.label}</span>
                   <small>{result.sign2.element_label}</small>
                 </div>
               </div>

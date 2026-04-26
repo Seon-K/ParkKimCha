@@ -1,3 +1,8 @@
+/**
+ * 개별 멤버 정보를 보여주는 카드 컴포넌트입니다.
+ *
+ * 이름, MBTI, 한마디, 좋아요 버튼을 표시합니다.
+ */
 import { useState } from 'react'
 import type { Member } from '../data/members'
 

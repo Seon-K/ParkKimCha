@@ -1,3 +1,9 @@
+/**
+ * 별자리 궁합 선택 및 결과 표시 컴포넌트입니다.
+ *
+ * 두 별자리 값을 선택하고, 선택 결과에 맞는 궁합 점수와 메시지를 렌더링합니다.
+ * 실제 API 연동 시 이 파일의 result 계산 부분을 fetch 로직으로 교체하면 됩니다.
+ */
 import { useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { getZodiacSign, zodiacSigns } from '../data/zodiac'

@@ -1,3 +1,8 @@
+/**
+ * 앱의 최상위 페이지 컴포넌트입니다.
+ *
+ * 멤버 소개 섹션과 별자리 궁합 섹션을 한 화면에 배치합니다.
+ */
 import MemberSection from './components/MemberSection'
 import ZodiacCompatibility from './components/ZodiacCompatibility'
 import './App.css'

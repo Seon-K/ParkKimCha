@@ -1,3 +1,8 @@
+/**
+ * 별자리 궁합 API 연동 전 화면 확인용 데이터를 계산하는 파일입니다.
+ *
+ * 실제 API 연동 후에는 이 파일과 getMockZodiacCompatibility import를 제거할 수 있습니다.
+ */
 import type { ZodiacCompatibility } from './zodiac'
 import { zodiacSigns } from './zodiac'
 

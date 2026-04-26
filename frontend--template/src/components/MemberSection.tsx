@@ -1,3 +1,8 @@
+/**
+ * 팀 멤버 소개 섹션 컴포넌트입니다.
+ *
+ * members 데이터를 순회하면서 MemberCard 목록을 렌더링합니다.
+ */
 import MemberCard from './MemberCard'
 import { members } from '../data/members'
 

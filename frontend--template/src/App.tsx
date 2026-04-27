@@ -1,20 +1,21 @@
-import { useState } from "react";
+import './App.css'
 import ZodiacCompatibility from './components/ZodiacCompatibility';
-// 👇 멤버 섹션을 보여주는 컴포넌트를 꼭 불러와야 합니다!
 import MemberSection from './components/MemberSection'; 
 
 function App() {
   return (
-    <div className="app-container">
-      {/* 1. 상단: 팀 멤버 카드 섹션 */}
-      <MemberSection />
-      
-      <hr style={{ margin: '40px 0', border: '0', borderTop: '1px solid #333' }} />
+    <main className="app-shell">
+      {/* 페이지 상단 소개 영역입니다. 실제 기능은 아래 섹션 컴포넌트에서 분리해 관리합니다. */}
+      <section className="hero-section" aria-labelledby="page-title">
+        <span className="eyebrow">Zodiac Match Lab</span>
+        <h1 id="page-title">별자리 궁합 테스트</h1>
+        <p>팀 ParkKimCha</p>
+      </section>
 
-      {/* 2. 하단: 별자리 궁합 섹션 (현재 잘 나오고 있는 부분) */}
+      <MemberSection />
       <ZodiacCompatibility />
-    </div>
-  );
+    </main>
+  )
 }
 
 export default App;

@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react'
 import type { CSSProperties } from 'react'
-import '../App.css'
 import LoadingSpinner from './LoadingSpinner'
 // 👇 아래 두 줄을 추가해서 사라진 데이터와 함수를 다시 불러오세요!
 //import { zodiacSigns } from '../data/zodiac' 

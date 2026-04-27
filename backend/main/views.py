@@ -36,6 +36,11 @@ OPPOSING_PAIRS = {
     ("air", "earth"),
 }
 
+NEUTRAL_PAIRS = {
+    ("earth", "fire"),
+    ("fire", "earth"),
+}
+
 
 def ZodiacCompatibilityView(request):
     sign1 = request.GET.get("sign1", "").lower()
@@ -67,6 +72,8 @@ def ZodiacCompatibilityView(request):
         score, compatibility, message = 70, "compatible", "서로에게 영감을 주는 찰떡궁합"
     elif (element1, element2) in OPPOSING_PAIRS:
         score, compatibility, message = 30, "opposing", "이해하기 위해 노력이 필요한 사이"
+    elif (element1, element2) in NEUTRAL_PAIRS:
+        score, compatibility, message = 40, "neutral", "각자의 속도가 다른 동반자"
     else:
         score, compatibility, message = 50, "unknown", "알 수 없는 궁합"
 
